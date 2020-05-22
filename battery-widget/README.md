@@ -26,6 +26,7 @@ It is possible to customize widget by providing a table with all or some of the 
 | `show_current_level`| false | Show current charge level |
 | `margin_right`|0| The right margin of the widget|
 | `margin_left`|0| The left margin of the widget|
+| `margins_icon` | `{0,0,0,0}` | The margins of the battery **icon** (not the whole widget). From left to right : left, right, top and bottom margins
 | `display_notification` | `false` | Display a notification on mouseover |
 | `notification_position` | `top_right` | The notification position |
 | `warning_msg_title` | _Huston, we have a problem_ | Title of the warning popup |

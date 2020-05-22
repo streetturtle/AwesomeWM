@@ -30,7 +30,7 @@ local function worker(args)
     local show_current_level = args.show_current_level or false
     local margin_left = args.margin_left or 0
     local margin_right = args.margin_right or 0
-
+    local margins_icon = args.margins_icon or {0,0,0,0}
     local display_notification = args.display_notification or false
     local position = args.notification_position or "top_right"
 
@@ -55,9 +55,9 @@ local function worker(args)
         {
             id = "icon",
             widget = wibox.widget.imagebox,
-            resize = false
+            resize = true
         },
-        layout = wibox.container.margin(_, 0, 0, 3)
+        layout = wibox.container.margin(_, margins_icon[1], margins_icon[2], margins_icon[3],margins_icon[4])
     }
     local level_widget = wibox.widget {
         font = font,

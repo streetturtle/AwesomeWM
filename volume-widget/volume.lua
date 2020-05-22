@@ -15,7 +15,6 @@ local naughty = require("naughty")
 local gfs = require("gears.filesystem")
 local dpi = require('beautiful').xresources.apply_dpi
 
-local PATH_TO_ICONS = "/usr/share/icons/Arc/status/symbolic/"
 local volume_icon_name="audio-volume-high-symbolic"
 local GET_VOLUME_CMD = 'amixer sget Master'
 
@@ -63,9 +62,9 @@ end
 --------------------------------------------------------
 local function update_graphic(widget, stdout, _, _, _)
     local txt = parse_output(stdout)
-    widget.image = PATH_TO_ICONS .. volume_icon_name .. ".svg"
+    widget.image = path_to_icons .. volume_icon_name .. ".svg"
     if volume.display_notification then
-        volume.notification.iconbox.image = PATH_TO_ICONS .. volume_icon_name .. ".svg"
+        volume.notification.iconbox.image = path_to_icons .. volume_icon_name .. ".svg"
         naughty.replace_text(volume.notification, "Volume", txt)
     end
 end
@@ -75,7 +74,7 @@ local function notif(msg, keep)
         naughty.destroy(volume.notification)
         volume.notification= naughty.notify{
             text =  msg,
-            icon=PATH_TO_ICONS .. volume_icon_name .. ".svg",
+            icon=path_to_icons .. volume_icon_name .. ".svg",
             icon_size = dpi(16),
             title = "Volume",
             position = volume.position,
@@ -92,8 +91,10 @@ local function worker(args)
 --{{{ Args
     local args = args or {}
 
+    path_to_icons = args.path_to_icons or "/usr/share/icons/Arc/status/symbolic/"
     local volume_audio_controller = args.volume_audio_controller or 'pulse'
     volume.display_notification = args.display_notification or false
+    local margins = args.margins or {0,0,0,0}
     volume.position = args.notification_position or "top_right"
     if volume_audio_controller == 'pulse' then
         volume.device = '-D pulse'
@@ -101,10 +102,10 @@ local function worker(args)
     GET_VOLUME_CMD = 'amixer ' .. volume.device.. ' sget Master'
 --}}}
 --{{{ Check for icon path
-    if not gfs.dir_readable(PATH_TO_ICONS) then
+    if not gfs.dir_readable(path_to_icons) then
         naughty.notify{
             title = "Volume Widget",
-            text = "Folder with icons doesn't exist: " .. PATH_TO_ICONS,
+            text = "Folder with icons doesn't exist: " .. path_to_icons,
             preset = naughty.config.presets.critical
         }
         return
@@ -114,11 +115,11 @@ local function worker(args)
     volume.widget = wibox.widget {
         {
             id = "icon",
-            image = PATH_TO_ICONS .. "audio-volume-muted-symbolic.svg",
+            image = path_to_icons .. "audio-volume-medium-symbolic.svg",
             resize = false,
             widget = wibox.widget.imagebox,
         },
-        layout = wibox.container.margin(_, _, _, 3),
+        layout = wibox.container.margin(_, margins[1], margins[2], margins[3],margins[4]),
         set_image = function(self, path)
             self.icon.image = path
         end

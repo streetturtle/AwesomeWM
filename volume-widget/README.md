@@ -13,6 +13,8 @@ It is possible to customize widget by providing a table with all or some of the 
 | `volume_audio_controller`| `pulse`    | audio device |
 | `display_notification`   | `false`    | Display a notification on mouseover and keypress |
 | `notification_position`  | `top_right`| The notification position |
+| `margins` | `{0,0,0,0}` | The margins of the widget. From left to right : left, right, top and bottom margins
+| `path_to_icons` | `/usr/share/icons/Arc/status/symbolic/` | Path to the folder with icons |
 
 ## Installation
 
