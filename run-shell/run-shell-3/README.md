@@ -23,7 +23,7 @@ Blurs / pixelates background and shows widget with run prompt:
 1. Require widget at the beginning of **rc.lua**:
 
     ```lua
-    local run_shell = require("awesome-wm-widgets.run-shell-3.run-shell")
+    local run_shell = require("awesome-wm-widgets.run-shell.run-shell-3.run-shell")
     ```
 
 1. Use it (don't forget to comment out the default prompt):
